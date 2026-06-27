@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBM Cyber Security - Keylogger Detector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        h1 { color: #38bdf8; margin-bottom: 5px; }
+        p { color: #94a3b8; }
+        button {
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-top: 15px;
+        }
+        button:hover { background-color: #0369a1; }
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            background: #0f172a;
+            border-left: 5px solid #38bdf8;
+            text-align: left;
+            font-family: monospace;
+            display: none;
+        }
+        .danger { border-left-color: #ef4444; color: #f87171; }
+        .safe { border-left-color: #22c55e; color: #4ade80; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Keylogger Detector Dashboard</h1>
+        <p>IBM Internship Project - Cyber Security Defense Tool</p>
+        <hr style="border-color: #334155;">
+        
+        <p style="text-align: left;"><strong>System Simulator:</strong> Click below to scan system APIs and Hooks for unauthorized key-logging activities.</p>
+        
+        <button onclick="scanSystem()">Run Security Scan</button>
+
+        <div id="result" class="result-box">
+            <!-- Scan results will appear here -->
+        </div>
+    </div>
+
+    <script>
+        function scanSystem() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result-box';
+            resultDiv.innerHTML = 'Scanning local system APIs... Please wait...';
+
+            // Simulating API call to Python Back-end
+            setTimeout(() => {
+                // Mock response matching backend logic
+                const isThreatDetected = Math.random() > 0.5; 
+                
+                if (isThreatDetected) {
+                    resultDiv.classList.add('danger');
+                    resultDiv.innerHTML = `<strong>[ALERT] Suspicious Activity Detected!</strong><br>
+                                           - Unauthorized Hook: User32.dll!SetWindowsHookEx<br>
+                                           - Status: HIGH RISK<br>
+                                           - Recommendation: Check active memory hooks immediately.`;
+                } else {
+                    resultDiv.classList.add('safe');
+                    resultDiv.innerHTML = `<strong>[SAFE] System Scan Clean!</strong><br>
+                                           - No unauthorized global keyboard hooks found.<br>
+                                           - Integrity Check: 100% Safe.<br>
+                                           - Status: SECURE`;
+                }
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
